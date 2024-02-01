@@ -2,6 +2,51 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from deep_translator import GoogleTranslator
 import nltk
 import streamlit as st
+import base64
+
+st.set_page_config(
+        page_title="Análise de Sentimento",
+        page_icon="👍"
+    )
+
+@st.cache_data()
+def get_img_as_base64(file):
+    with open(file, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+img = get_img_as_base64("fundo4k.png")
+img2 = get_img_as_base64("pdifundo2.png")
+
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+    background-image: url("data:fundo4k/png;base64,{img}");
+    background-size: 100%;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}}
+[data-testid="stSidebar"] > div:first-child {{
+    background-image: url("data:pdifundo2/png;base64,{img2}");
+    background-position: center; 
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}}
+
+[data-testid="stHeader"] {{
+    background: rgba(0,0,0,0);
+}}
+
+[data-testid="stToolbar"] {{
+    right: 2rem;
+}}
+</style>
+"""
+st.markdown(page_bg_img, unsafe_allow_html=True)
+st.sidebar.image("Logopdi.png", width=280)
+
 
 def translate_text(text):
     translator = GoogleTranslator(source='pt', target='en')
@@ -14,14 +59,6 @@ def analyze_sentiment(text):
     return sentiment_score
 
 def main():
-    # Configurando o ícone e o título da aba do navegador
-    st.set_page_config(
-        page_title="Análise de Sentimento",
-        page_icon="👍"
-    )
-
-    # Usar st.sidebar.image para adicionar a imagem ao sidebar
-    st.sidebar.image("Logopdi.png", width=280)
 
     st.title("Análise de Sentimento")
     nltk.download('vader_lexicon')
