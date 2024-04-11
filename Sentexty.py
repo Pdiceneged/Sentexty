@@ -51,9 +51,8 @@ header, footer {{
 [data-testid="stToolbar"] {{
     right: 2rem;
 }}
-
 .stTextInput>div>div>input[type="text"] {{
-    background-color: #CFE6D2; 
+    background-color: #C5D6ED; 
     color: #000; 
     border-radius: 7px; 
     border: 2px solid #000010; 
