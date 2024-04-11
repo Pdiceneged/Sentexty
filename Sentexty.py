@@ -52,7 +52,7 @@ header, footer {{
     right: 2rem;
 }}
 .stTextInput>div>div>input[type="text"] {{
-    background-color: #C5D6ED; 
+    background-color: #C5D6FF; 
     color: #000; 
     border-radius: 7px; 
     border: 2px solid #000010; 
