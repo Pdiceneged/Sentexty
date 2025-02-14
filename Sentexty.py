@@ -1,5 +1,5 @@
 from nltk.sentiment import SentimentIntensityAnalyzer
-from deep_translator import GoogleTranslator
+from deep_translator import GoogleTranslator, TranslationNotFound
 import nltk
 import streamlit as st
 import base64
@@ -74,9 +74,9 @@ def translate_text(text):
     translator = GoogleTranslator(source='pt', target='en')
     try:
         translated_text = translator.translate(text)
-    except Exception as e:
-        st.error("Erro na tradução. Tente novamente ou use outro serviço de tradução.")
-        return text  # Ou um fallback apropriado
+    except TranslationNotFound:
+        st.error("Não foi possível traduzir o texto. Tente novamente mais tarde ou utilize outro serviço de tradução.")
+        return text  # ou um fallback adequado
     return translated_text
 
 def analyze_sentiment(text):
