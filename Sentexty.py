@@ -70,10 +70,13 @@ header, footer {{
 st.markdown(page_bg_img, unsafe_allow_html=True)
 st.sidebar.image("Logopdi.png", width=280)
 
-
 def translate_text(text):
     translator = GoogleTranslator(source='pt', target='en')
-    translated_text = translator.translate(text)
+    try:
+        translated_text = translator.translate(text)
+    except Exception as e:
+        st.error("Erro na tradução. Tente novamente ou use outro serviço de tradução.")
+        return text  # Ou um fallback apropriado
     return translated_text
 
 def analyze_sentiment(text):
